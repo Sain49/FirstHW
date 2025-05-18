@@ -1,7 +1,10 @@
 body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
-  margin: 0 5px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
   background-color: pink;
 }
 
@@ -96,4 +99,17 @@ footer {
 
 footer p {
   padding: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .recipe-section {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  body {
+    width: 1280px;
+    margin: 0 auto;
+  }
 }
