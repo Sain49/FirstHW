@@ -1,0 +1,44 @@
+Accessibility Review Report
+
+1. Introduction
+This report outlines the findings and actions taken following a WCAG-based accessibility review of the provided web page. The goal was to identify and address potential accessibility issues related to image descriptions, color contrast, and semantic structure.
+
+2. Files Reviewed
+- index.html
+- css/style.css
+
+3. Summary of Findings and Actions Taken
+
+   3.1. Image Accessibility
+      - Initial State: The primary images on the page, intended to depict a pancake recipe and serving suggestions, had alt texts that were misleading (e.g., "An image of a hot chicken dish").
+      - Action Taken: The `alt` attributes for the three main images in `index.html` were updated to accurately describe their content in the context of a pancake recipe.
+          - `img/dish1-unsplash.jpg` (header image) alt text changed to "En hög med nylagade pannkakor".
+          - `img/dish2-unsplash.jpg` (serving suggestion) alt text changed to "Pannkakor serverade med färska bär och sirap".
+          - `img/dish3-unsplash.jpg` (serving suggestion) alt text changed to "Pannkakor serverade med vispgrädde och frukt".
+
+   3.2. Color Contrast
+      - Analysis: Key text and background color combinations were analyzed for compliance with WCAG contrast ratio requirements. The combinations checked were:
+          - Body text (black #000000) on pink background (#FFC0CB) - Text size: Large (1.5rem)
+          - Header H1 text (brown #A52A2A) on white background (#FFFFFF) - Text size: Large (2rem)
+          - Header P text (black #000000) on whitesmoke background (#F5F5F5) - Text size: Normal (1rem)
+          - General text (black #000000) on white background (#FFFFFF) - Text sizes: Large (1.5rem section headers) and Normal (1rem list items, footer text)
+      - Result: All tested combinations were found to meet both WCAG AA and AAA level contrast requirements for their respective text sizes. No changes to color definitions were necessary.
+          - Body (black on pink): Ratio 13.6:1 (Passes AA & AAA for large text)
+          - H1 (brown on white): Ratio 7.08:1 (Passes AA & AAA for large text)
+          - Header P (black on whitesmoke): Ratio 19.2:1 (Passes AA & AAA for normal text)
+          - General (black on white): Ratio 21:1 (Passes AA & AAA for both normal and large text)
+
+   3.3. Semantic HTML & ARIA
+      - Initial State: The `index.html` file demonstrated a good baseline semantic structure using elements like `<header>`, `<main>`, `<footer>`, `<section>`, and `<article>`.
+      - Action Taken: To further enhance semantic clarity and improve navigation for assistive technologies, ARIA attributes were added. `id` attributes were assigned to the headings of key content sections and articles. These headings were then linked to their respective container elements (`<article>` or `<section>`) using the `aria-labelledby` attribute. This was implemented for:
+          - The ingredients article (`<article class="ingredients">` and its `<h2>`).
+          - The instructions article (`<article class="instructions">` and its `<h2>`).
+          - The serving suggestion section (`<section class="serving-suggestion">` and its `<h2>`).
+
+4. Further Recommendations (Optional)
+
+   - The use of `<div id="container">` as the main page wrapper is acceptable. However, for more modern CSS layout practices, consider refactoring this to use semantic HTML5 elements directly for layout (e.g., styling the `body` or a main landmark element) or employing CSS Grid/Flexbox on a higher-level element. This is not an accessibility blocker but a suggestion for future code refinement.
+   - It is recommended to perform periodic accessibility evaluations, especially when new content, styles, or functionalities are introduced to the website. This ensures ongoing compliance and an inclusive user experience.
+
+5. Conclusion
+The accessibility review resulted in significant improvements to the web page. Image alt texts were corrected to provide accurate descriptions, color contrast ratios were confirmed to meet high accessibility standards, and the semantic structure was enhanced with ARIA attributes for better assistive technology support. These changes contribute to a more accessible and understandable experience for all users.
