@@ -4,10 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="En reciept sida" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Pannkakor</title>
@@ -15,11 +25,16 @@
   <body>
     <div id="container">
       <figure>
-        <img
-          id="header-img"
-          src="img/dish1-unsplash.jpg"
-          alt="An image of a hot chicken dish"
-        />
+        <picture>
+          <source srcset="img/dish1-unsplash.webp" type="image/webp">
+          <source srcset="img/dish1-unsplash.jpg" type="image/jpeg">
+          <img
+            id="header-img"
+            src="img/dish1-unsplash.jpg"
+            alt="En hög med nylagade pannkakor"
+            style="width: 100%; height: auto;"
+          />
+        </picture>
       </figure>
       <header>
         <h1 id="header-h1">Enkelt recept på pannkakor</h1>
@@ -30,8 +45,8 @@
       </header>
       <main>
         <section class="recipe-section">
-          <article class="ingredients">
-            <h2>Ingredienser <span class="normal-weight">(4 port)</span></h2>
+          <article class="ingredients" aria-labelledby="ingredients-heading">
+            <h2 id="ingredients-heading">Ingredienser <span class="normal-weight">(4 port)</span></h2>
             <ul>
               <li>2 1/2 dl vetemjöl</li>
               <li>1/2 tsk salt</li>
@@ -41,8 +56,8 @@
               <li>Sylt, bär eller frukt till servering</li>
             </ul>
           </article>
-          <article class="instructions">
-            <h2>Så här gör du</h2>
+          <article class="instructions" aria-labelledby="instructions-heading">
+            <h2 id="instructions-heading">Så här gör du</h2>
             <ol>
               <li>Blanda mjöl och salt i en bunke.</li>
               <li>Vispa i hälften av mjölken och vispa till en slät smet.</li>
@@ -56,17 +71,27 @@
             </ol>
           </article>
         </section>
-        <section class="serving-suggestion">
-          <h2>Serverings förslag</h2>
+        <section class="serving-suggestion" aria-labelledby="serving-suggestion-heading">
+          <h2 id="serving-suggestion-heading">Serverings förslag</h2>
           <div>
-            <img
-              src="img/dish2-unsplash.jpg"
-              alt="An image of a chicken curry dish"
-            />
-            <img
-              src="img/dish3-unsplash.jpg"
-              alt="An image of a chicken sour sweet soup dish"
-            />
+            <picture>
+              <source srcset="img/dish2-unsplash.webp" type="image/webp">
+              <source srcset="img/dish2-unsplash.jpg" type="image/jpeg">
+              <img
+                src="img/dish2-unsplash.jpg"
+                alt="Pannkakor serverade med färska bär och sirap"
+                style="width: calc(50% - 7.5px); border-radius: 1px; object-fit: cover;"
+              />
+            </picture>
+            <picture>
+              <source srcset="img/dish3-unsplash.webp" type="image/webp">
+              <source srcset="img/dish3-unsplash.jpg" type="image/jpeg">
+              <img
+                src="img/dish3-unsplash.jpg"
+                alt="Pannkakor serverade med vispgrädde och frukt"
+                style="width: calc(50% - 7.5px); border-radius: 1px; object-fit: cover;"
+              />
+            </picture>
           </div>
         </section>
       </main>

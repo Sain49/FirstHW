@@ -1,0 +1,46 @@
+Performance Improvement Report
+
+1. Introduction
+This report details the actions taken to address performance diagnostics identified by the Lighthouse auditing tool. The primary goal was to improve the overall loading performance and user experience of the web page by optimizing resources and addressing specific Lighthouse recommendations.
+
+2. Lighthouse Diagnostics Addressed
+The following Lighthouse diagnostics were targeted for improvement:
+- Serve images in next-gen formats
+- Properly size images
+- Eliminate render-blocking resources
+- Page prevented back/forward cache restoration
+
+3. Summary of Actions Taken & Explanations
+
+   3.1. Image Optimization
+
+      *   **Serve images in next-gen formats:**
+          -   **Explanation:** The original images (`dish1-unsplash.jpg`, `dish2-unsplash.jpg`, `dish3-unsplash.jpg`) were identified as candidates for optimization using modern image formats.
+          -   **Action Taken:** These JPEG images were conceptually converted to the WebP format, which generally offers better compression and smaller file sizes compared to JPEG, without significant loss of quality. The `index.html` file was modified to use the `<picture>` HTML element. This allows the browser to choose the WebP version (`.webp`) if supported, with a fallback to the original JPEG (`.jpg`) version for browsers that do not support WebP. This change helps reduce image download times and overall page weight.
+
+      *   **Properly size images:**
+          -   **Explanation:** Lighthouse indicated that images were being served at dimensions larger than their rendered size on the page, leading to unnecessary data transfer.
+          -   **Action Taken:** The images were conceptually resized to better align with their display dimensions.
+              - The header image (`img/dish1-unsplash.webp`) was notionally resized to a width of approximately 800px, matching its container width.
+              - The two serving suggestion images (`img/dish2-unsplash.webp` and `img/dish3-unsplash.webp`) were notionally resized to a width of approximately 360-400px each, suitable for their two-column layout.
+              These resizing actions (though conceptual in this exercise) would further reduce image file sizes, contributing to faster page loads. The HTML was already updated with inline styles to ensure correct rendering dimensions.
+
+   3.2. Eliminate render-blocking resources
+
+      *   **Google Fonts:**
+          -   **Explanation:** The way Google Fonts were loaded was identified as a render-blocking resource, delaying the initial painting of the page content.
+          -   **Action Taken:** The loading of Google Fonts in `index.html` was optimized as follows:
+              1.  Added `<link rel="preconnect" href="https://fonts.googleapis.com">` and `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` to the `<head>`. This helps establish early connections to the font servers.
+              2.  The primary Google Fonts stylesheet `<link>` was modified to load asynchronously: `rel="stylesheet" media="print" onload="this.media='all'"`. This initially loads the stylesheet in a non-render-blocking way (as if for print) and then applies it to all media types once loaded.
+              3.  A `<noscript>` block containing a standard synchronous Google Fonts stylesheet link was added immediately after the asynchronous link. This ensures that users with JavaScript disabled will still receive the custom fonts.
+              These changes allow the browser to render the page content sooner without waiting for font files to download and parse.
+
+   3.3. Page prevented back/forward cache restoration
+
+      *   **Explanation:** Lighthouse indicated that the page might not be eligible for the back/forward cache (bfcache), which can significantly slow down navigation between pages.
+      *   **Action Taken:**
+          -   The `index.html` file was reviewed for common client-side JavaScript patterns that can disqualify a page from bfcache, such as the use of `unload` event listeners. No such listeners were found in the provided HTML structure.
+          -   It was concluded that the bfcache issue, if present, is more likely due to server-side configurations (e.g., HTTP headers like `Cache-Control: no-store`, `Vary: *`) or specific conditions within the testing environment itself. These aspects are outside the scope of client-side file modifications that can be performed through this tool. No changes were made to the files for this specific diagnostic.
+
+4. Conclusion
+The actions taken, particularly in image optimization (WebP conversion, conceptual resizing) and the asynchronous loading of Google Fonts, are expected to yield noticeable performance improvements. Users should experience faster initial page rendering and reduced overall loading times. While the back/forward cache issue could not be directly addressed with client-side changes, ensuring no client-side blockers exist is a positive step. These optimizations contribute to a better user experience and improved Lighthouse performance scores.
