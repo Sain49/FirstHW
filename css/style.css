@@ -72,14 +72,14 @@ header {
 
 .serving-suggestion h2 {
   font-size: 1.5rem;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
 
 .normal-weight {
   font-weight: normal;
 }
 
-.serving-suggestion div {
+.serving-suggestion {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
